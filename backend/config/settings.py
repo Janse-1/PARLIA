@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third-party apps
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     # Local PARLIA domain apps
     'apps.accounts.apps.AccountsConfig',
@@ -157,12 +158,13 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 # Django REST Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
+    'EXCEPTION_HANDLER': 'config.exceptions.custom_exception_handler',
 }
 
 

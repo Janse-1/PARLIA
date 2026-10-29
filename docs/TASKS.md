@@ -73,23 +73,23 @@
 ## Fase 3: Desarrollo de la API REST (`/api/v1/`)
 **Objetivo:** Construir y probar endpoints de autenticación, lectura de contenidos, actividades y registro de progreso sin brechas de seguridad (IDOR).
 
-- [ ] **T3.1** Endpoints de Autenticación (`apps/accounts`):
+- [x] **T3.1** Endpoints de Autenticación (`apps/accounts`):
   - Crear Serializers para login y datos de usuario.
   - Implementar vistas para `/api/v1/auth/login/`, `/api/v1/auth/logout/` y `/api/v1/me/`.
   - Probar autenticación por tokens o sesiones verificando el retorno seguro de datos.
-- [ ] **T3.2** Endpoints de Contenido Pedagógico (`apps/learning`):
+- [x] **T3.2** Endpoints de Contenido Pedagógico (`apps/learning`):
   - Crear `ModuleSerializer` y `LessonSerializer`.
   - Implementar endpoint `/api/v1/modules/` (listado ordenado de módulos publicados).
   - Implementar endpoint `/api/v1/modules/{id}/` (módulo con lista de lecciones).
   - Implementar endpoint `/api/v1/lessons/{id}/` (contenido completo de la lección y recursos multimedia).
-- [ ] **T3.3** Endpoints de Progreso (`apps/progress`):
+- [x] **T3.3** Endpoints de Progreso (`apps/progress`):
   - Crear `ProgressSerializer`.
   - Implementar endpoint `GET /api/v1/progress/me/` que extraiga `request.user` y devuelva el estado de todas las lecciones del estudiante.
   - Implementar endpoint `POST/PATCH /api/v1/progress/` para actualizar estado (`in_progress`, `completed`) usando `update_or_create` sin permitir manipulación de IDs externos.
-- [ ] **T3.4** Endpoints de Actividades (`apps/activities`):
+- [x] **T3.4** Endpoints de Actividades (`apps/activities`):
   - Implementar `GET /api/v1/activities/{id}/` para servir preguntas formativas sin revelar la respuesta correcta con antelación.
   - Implementar `POST /api/v1/activities/{id}/attempts/` para registrar intentos y devolver la explicación formativa.
-- [ ] **T3.5** *Exit Criteria Día 3:* Todos los endpoints probados y respondiendo con formato estandarizado JSON (`status`, `data`, `message`). Cero vulnerabilidades IDOR.
+- [x] **T3.5** *Exit Criteria Día 3:* Todos los endpoints probados y respondiendo con formato estandarizado JSON (`status`, `data`, `message`). Cero vulnerabilidades IDOR.
 
 ---
 

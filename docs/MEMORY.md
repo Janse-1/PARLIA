@@ -9,32 +9,29 @@
 ## 1. Estado Actual de la Implementación
 * **Fases Completadas:**
   - Fase 1 (Inicialización del Entorno, Configuración Base y Conexiones) — 100%.
-  - Fase 2 (Modelado de Datos, Migraciones y Panel de Administración) — 100% (`T2.1` a `T2.6` completadas).
-* **Fase Activa:** Fase 3 (Desarrollo de la API REST `/api/v1/`).
-* **Subtarea Siguiente:** T3.1 (Endpoints de Autenticación en `apps/accounts`).
+  - Fase 2 (Modelado de Datos, Migraciones y Panel de Administración) — 100%.
+  - Fase 3 (Desarrollo de la API REST `/api/v1/`) — 100% (`T3.1` a `T3.5` completadas).
+* **Fase Activa:** Fase 4 (Frontend Base - Layout, Navegación y Vistas de Estudio).
+* **Subtarea Siguiente:** T4.1 (Sistema de Estilos y Tokens de Diseño en `frontend/src/styles/`).
 
 ---
 
-## 2. Estado de Base de Datos y Django Admin
-* **Tablas en MySQL (`parlia_db`):**
-  - `accounts_user` (con los 7 programas: `Sistemas`, `Industrial`, `Mecanica`, `Civil`, `Ambiental`, `Energias`, `Otro`).
-  - `learning_module`, `learning_lesson` (`unique_module_lesson_order`), `learning_mediaasset`.
-  - `activities_activity`, `activities_question`, `activities_activityattempt`.
-  - `progress_learningprogress` (`unique_user_lesson_progress`).
-* **Superusuario Local:**
-  - Correo: `admin@uniguajira.edu.co` / Username: `admin` / Contraseña local: `ParliaAdmin2026*`.
-* **6 Módulos Oficiales Cargados en MySQL:**
-  1. Fundamentos de la Inteligencia Artificial Generativa
-  2. Ingeniería de Prompts
-  3. Verificaciones
-  4. Ética, Privacidad e Integridad Académica
-  5. Aplicación en investigación, redacción
-  6. Actividades finales
+## 2. Matriz Completa de Endpoints Activos (`/api/v1/`)
+Todos los endpoints responden con formato estandarizado `{"status": "success", "data": ...}` o `{"status": "error", "code": "...", "message": "...", "details": ...}`:
+* `POST /api/v1/auth/login/` (`AllowAny`): Autentica credenciales y devuelve `token` + perfil (`UserSerializer`).
+* `POST /api/v1/auth/logout/` (`IsAuthenticated`): Revoca el token y cierra sesión.
+* `GET /api/v1/me/` (`IsAuthenticated`): Información del estudiante activo extraída de `request.user`.
+* `GET /api/v1/modules/` (`IsAuthenticated`): Los 6 módulos oficiales publicados con `lessons_count`.
+* `GET /api/v1/modules/{id}/` (`IsAuthenticated`): Detalle de módulo con listado ordenado de lecciones.
+* `GET /api/v1/lessons/{id}/` (`IsAuthenticated`): Contenido de lección, `media_assets`, `activity_id` y navegación anterior/siguiente.
+* `GET /api/v1/progress/me/` (`IsAuthenticated`): Resumen global, avance por módulo y registros detallados de `request.user` (anti-IDOR).
+* `POST` / `PATCH /api/v1/progress/` (`IsAuthenticated`): Upsert de estado (`in_progress`, `completed`) sin duplicados (`UniqueConstraint`).
+* `GET /api/v1/activities/{id}/` (`IsAuthenticated`): Actividad y preguntas formativas ocultando `is_correct` antes de responder.
+* `POST /api/v1/activities/{id}/attempts/` (`IsAuthenticated`): Registra intento formativo no punitivo para `request.user` y devuelve retroalimentación inmediata (`title`, `is_correct`, `explanation`).
 
 ---
 
 ## 3. Próximos Pasos Inmediatos
-1. Ejecutar **T3.1** (Endpoints de Autenticación en `apps/accounts`):
-   - Crear serializers (`LoginSerializer`, `UserSerializer`).
-   - Implementar vistas para `POST /api/v1/auth/login/`, `POST /api/v1/auth/logout/` y `GET /api/v1/me/` siguiendo el formato estándar de respuesta (`{"status": "success", "data": ...}` y `{"status": "error", "code": ..., "message": ..., "details": ...}`).
-   - Conectar rutas en `apps/accounts/urls.py` y `config/urls.py`.
+1. Ejecutar **T4.1** (Sistema de Estilos y Tokens de Diseño):
+   - Crear `frontend/src/styles/variables.css` con la paleta institucional de Uniguajira (`#C2822B` Ocre Tierra, `#2A9D8F` Aguamarina Caribe, `#E76F51` Rosa Flamenco/Coral, superficies `#F8F9FA`, `#FFFFFF`, texto `#1F2937`, `#6B7280`, éxito `#10B981`).
+   - Crear `frontend/src/styles/main.css` con tipografía `'Inter'`, reset CSS limpio, utilidades de layout y soporte a `@media (prefers-reduced-motion: reduce)`.
