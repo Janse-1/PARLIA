@@ -34,7 +34,7 @@
   - Crear la base de datos en MySQL: `CREATE DATABASE parlia_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`.
   - Configurar `backend/config/settings.py` para enlazar variables de entorno, aplicaciones locales, DRF y CORS.
   - Verificar conexión a MySQL ejecutando las migraciones base de Django (`python manage.py migrate`).
-- [ ] **T1.4** Inicialización del Frontend con Vite:
+- [/] **T1.4** Inicialización del Frontend con Vite:
   - Crear proyecto Vue 3 con Vite: `npm create vite@latest frontend -- --template vue`.
   - Acceder a `frontend/` e instalar dependencias del cliente: `npm install vue-router pinia axios animejs`.
   - Crear `frontend/.env.example` y `frontend/.env` con `VITE_API_BASE_URL=http://localhost:8000/api/v1`.
@@ -47,10 +47,10 @@
 
 **Objetivo:** Implementar los modelos relacionales en Django, aplicar restricciones de unicidad y configurar el panel de Django Admin para poblar los 6 módulos.
 
-- [ ] **T2.1** Modelo de Usuario (`apps/accounts`):
-  - Extender `AbstractUser` para crear el modelo `User` con campos `email` (único), `program` (Sistemas, Industrial, Mecánica, Civil, Otro) y nombre completo.
+- [x] **T2.1** Modelo de Usuario (`apps/accounts`):
+  - Extender `AbstractUser` para crear el modelo `User` con campos `email` (único), `program` (Sistemas, Industrial, Mecánica, Civil, Ambiental, Energias, Otro) y nombre completo.
   - Registrar el modelo en `AUTH_USER_MODEL = 'accounts.User'`.
-- [ ] **T2.2** Modelos de Aprendizaje (`apps/learning`):
+- [x] **T2.2** Modelos de Aprendizaje (`apps/learning`):
   - Implementar `Module` (`title`, `slug`, `description`, `order`, `is_published`).
   - Implementar `Lesson` (`module`, `title`, `slug`, `content`, `estimated_minutes`, `order`, `is_published`) con restricción `UNIQUE (module_id, order)`.
   - Implementar `MediaAsset` (`lesson`, `title`, `asset_type`, `url`, `description`).

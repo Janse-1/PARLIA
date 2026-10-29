@@ -137,6 +137,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'accounts.User'
+
 
 # CORS & Security Settings
 CORS_ALLOWED_ORIGINS = [

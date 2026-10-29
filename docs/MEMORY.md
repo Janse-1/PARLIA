@@ -7,33 +7,29 @@
 ---
 
 ## 1. Estado Actual de la Implementación
-* **Fase Activa:** Fase 1 (Inicialización del Entorno)
-* **Subtareas Completadas:**
-  - T1.1 (Instalación de dependencias del Backend)
-  - T1.2 (Inicialización del proyecto Django y apps modulares)
-  - T1.3 (Configuración de Base de Datos MySQL y Settings)
-* **Subtarea Siguiente:** T1.4 (Inicialización del Frontend con Vite)
+* **Fase Completada:** Fase 1 (Inicialización del Entorno, Configuración Base y Conexiones) — 100%.
+* **Fase Activa:** Fase 2 (Modelado de Datos, Migraciones y Panel de Administración).
+* **Subtareas Completadas en Fase 2:**
+  - T2.1 (Modelo de Usuario en `apps/accounts`).
+  - T2.2 (Modelos de Aprendizaje en `apps/learning`).
+* **Subtarea Siguiente:** T2.3 (Modelos de Actividades en `apps/activities`).
 
 ---
 
-## 2. Configuración y Entorno de Ejecución
-* **Python Virtualenv:** `.venv` funcional con Python 3.12.5.
-* **Dependencias Backend (`backend/requirements.txt`):**
-  - `Django==5.2.18` (LTS compatible con MySQL 8.0.40)
-  - `djangorestframework==3.18.3`
-  - `django-cors-headers==4.9.0`
-  - `mysqlclient==2.3.0`
-  - `python-dotenv==1.2.4`
-* **Base de Datos MySQL:**
-  - Base de datos `parlia_db` creada con `CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci` en MySQL 8.0.40 (`127.0.0.1:3306`).
-  - `backend/config/settings.py` enlazado a `.env`, con `rest_framework`, `corsheaders` y las 4 apps (`apps.accounts`, `apps.learning`, `apps.activities`, `apps.progress`) registradas.
-  - Migraciones iniciales de Django aplicadas exitosamente en MySQL.
+## 2. Modelos Implementados
+* **`apps.accounts.models.User`** (tabla `accounts_user`):
+  - Extiende `AbstractUser` (`USERNAME_FIELD = 'email'`).
+  - `program`: `Sistemas`, `Industrial`, `Mecanica`, `Civil`, `Ambiental`, `Energias`, `Otro`.
+* **`apps.learning.models`:**
+  - `Module` (tabla `learning_module`): `title`, `slug` (único), `description`, `order`, `is_published`, `created_at`, `updated_at`.
+  - `Lesson` (tabla `learning_lesson`): `module` (FK), `title`, `slug`, `content`, `estimated_minutes`, `order`, `is_published`, `created_at`, `updated_at`, con `UniqueConstraint(fields=['module', 'order'], name='unique_module_lesson_order')`.
+  - `MediaAsset` (tabla `learning_mediaasset`): `lesson` (FK), `title`, `asset_type` (`video_url`, `image_url`, `external_doc`), `url`, `description`.
 
 ---
 
 ## 3. Próximos Pasos Inmediatos
-1. Ejecutar **T1.4**:
-   - Crear proyecto Vue 3 con Vite en `frontend/`.
-   - Instalar dependencias del cliente: `vue-router`, `pinia`, `axios`, `animejs`.
-   - Configurar `frontend/.env.example` y `frontend/.env` (`VITE_API_BASE_URL=http://localhost:8000/api/v1`).
-   - Crear la estructura de directorios en `frontend/src/` (`assets/`, `components/`, `layouts/`, `router/`, `services/`, `stores/`, `styles/`, `views/`).
+1. Ejecutar **T2.3** (Modelos de Actividades en `apps/activities`):
+   - `ActivityType` (`multiple_choice`, `reflection`, `prompt_audit`).
+   - `Activity` (`lesson` OneToOneField, `title`, `description`, `activity_type`).
+   - `Question` (`activity` FK, `prompt_text`, `options_json`, `explanation`, `order`).
+   - `ActivityAttempt` (`user` FK, `activity` FK, `selected_option`, `reflection_text`, `is_correct`, `submitted_at`).
