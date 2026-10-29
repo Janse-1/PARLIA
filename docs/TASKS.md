@@ -54,19 +54,19 @@
   - Implementar `Module` (`title`, `slug`, `description`, `order`, `is_published`).
   - Implementar `Lesson` (`module`, `title`, `slug`, `content`, `estimated_minutes`, `order`, `is_published`) con restricción `UNIQUE (module_id, order)`.
   - Implementar `MediaAsset` (`lesson`, `title`, `asset_type`, `url`, `description`).
-- [ ] **T2.3** Modelos de Actividades (`apps/activities`):
+- [x] **T2.3** Modelos de Actividades (`apps/activities`):
   - Implementar `Activity` (`lesson`, `title`, `description`, `activity_type`) con relación `OneToOne` con `Lesson`.
   - Implementar `Question` (`activity`, `prompt_text`, `options_json`, `explanation`, `order`).
   - Implementar `ActivityAttempt` (`user`, `activity`, `selected_option`, `reflection_text`, `is_correct`, `submitted_at`).
-- [ ] **T2.4** Modelo de Progreso (`apps/progress`):
+- [x] **T2.4** Modelo de Progreso (`apps/progress`):
   - Implementar `LearningProgress` (`user`, `lesson`, `status`, `started_at`, `completed_at`, `updated_at`).
   - Definir la restricción obligatoria `UniqueConstraint(fields=['user', 'lesson'], name='unique_user_lesson_progress')`.
-- [ ] **T2.5** Migraciones y Django Admin:
+- [x] **T2.5** Migraciones y Django Admin:
   - Generar y aplicar migraciones: `python manage.py makemigrations` y `python manage.py migrate`.
   - Registrar todos los modelos en los archivos `admin.py` correspondientes con filtros de búsqueda y visualización ordenada.
   - Crear superusuario: `python manage.py createsuperuser`.
   - Cargar desde el admin el esqueleto de los **6 módulos oficiales de PARLIA**.
-- [ ] **T2.6** *Exit Criteria Día 2:* Base de datos estructurada en MySQL con sus tablas y llaves foráneas. Los 6 módulos creados y visibles en Django Admin.
+- [x] **T2.6** *Exit Criteria Día 2:* Base de datos estructurada en MySQL con sus tablas y llaves foráneas. Los 6 módulos creados y visibles en Django Admin.
 
 ---
 
