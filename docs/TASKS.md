@@ -21,16 +21,16 @@
 
 **Objetivo:** Instalar dependencias esenciales, configurar la base de datos MySQL y dejar corriendo los servidores de desarrollo de Vue 3 y Django.
 
-- [ ] **T1.1** Instalación de dependencias del Backend:
+- [x] **T1.1** Instalación de dependencias del Backend:
   - Verificar versión de Python (`python --version` $\ge$ 3.12).
   - Instalar dependencias base en el `venv`: `django`, `djangorestframework`, `django-cors-headers`, `mysqlclient`, `python-dotenv`.
   - Generar el archivo inicial `backend/requirements.txt` con las versiones fijadas.
-- [ ] **T1.2** Inicialización del proyecto Django:
+- [x] **T1.2** Inicialización del proyecto Django:
   - Crear la estructura del backend: `django-admin startproject config backend`.
   - Crear las aplicaciones modulares: `apps/accounts`, `apps/learning`, `apps/activities`, `apps/progress`.
   - Configurar `backend/.gitignore` asegurando la exclusión de `.env`, `__pycache__/` y archivos locales.
   - Crear `backend/.env.example` y el archivo `backend/.env` local.
-- [ ] **T1.3** Configuración de Base de Datos y Settings:
+- [x] **T1.3** Configuración de Base de Datos y Settings:
   - Crear la base de datos en MySQL: `CREATE DATABASE parlia_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`.
   - Configurar `backend/config/settings.py` para enlazar variables de entorno, aplicaciones locales, DRF y CORS.
   - Verificar conexión a MySQL ejecutando las migraciones base de Django (`python manage.py migrate`).
