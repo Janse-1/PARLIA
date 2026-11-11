@@ -1,0 +1,61 @@
+:root {
+  /* 1.1. Paleta Primaria (Colores Institucionales Uniguajira) */
+  --color-primary: #C2822B;         /* Ocre Tierra: Acento Primario y Logros */
+  --color-primary-hover: #9E671E;
+  --color-primary-soft: rgba(194, 130, 43, 0.12);
+
+  --color-secondary: #2A9D8F;       /* Aguamarina Caribe: Secundario y Fluidez */
+  --color-secondary-hover: #1F7369;
+  --color-secondary-soft: rgba(42, 157, 143, 0.12);
+
+  --color-accent: #E76F51;          /* Rosa Flamenco / Coral: Acento Dinámico y Banderas */
+  --color-accent-hover: #D45233;
+  --color-accent-soft: rgba(231, 111, 81, 0.12);
+
+  --color-sun-gold: #FDDA24;        /* Sol Dorado en la Cumbre */
+
+  /* 1.2. Superficies y Neutros (Modo Claro de Alto Data-Ink Ratio) */
+  --bg-app: #F8F9FA;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F3F4F6;
+  --border-subtle: #E5E7EB;
+  --path-pending: #D1D5DB;
+
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --text-inverse: #FFFFFF;
+
+  --color-success: #10B981;
+  --color-success-soft: rgba(16, 185, 129, 0.12);
+
+  /* 2. Tipografía */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+  /* 3. Dimensiones de Layout */
+  --topbar-height: 64px;
+  --sidebar-expanded-width: 260px;
+  --sidebar-collapsed-width: 72px;
+
+  /* 4. Espaciado y Bordes (Múltiplos de 8px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-elevated: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+
+  --transition-fast: 200ms ease-out;
+  --transition-normal: 260ms ease-out;
+}
+

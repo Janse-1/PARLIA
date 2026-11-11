@@ -97,24 +97,24 @@
 
 **Objetivo:** Maquetar la estructura visual de PARLIA en Vue 3 con tokens de Uniguajira, Sidebar plegable, Topbar fija y vista de lectura de lecciones.
 
-- [ ] **T4.1** Sistema de Estilos y Tokens de Diseño:
+- [x] **T4.1** Sistema de Estilos y Tokens de Diseño:
   - Crear `frontend/src/styles/variables.css` con la paleta de Uniguajira (Ocre `#C2822B`, Aguamarina `#2A9D8F`, Flamenco `#E76F51`, Neutros `#F8F9FA`, `#1F2937`).
   - Configurar tipografía del sistema (`Inter`), estilos base y reseteo CSS.
-- [ ] **T4.2** Componente Topbar Superior:
+- [x] **T4.2** Componente Topbar Superior:
   - Maquetar la barra fija superior (`height: 64px`) con botón toggle `[≡]`, logo de PARLIA e íconos: `Videos`, `Noticias`, `Progreso` y `Perfil`.
   - Configurar enlaces y estados reactivos.
-- [ ] **T4.3** Componente Sidebar Colapsable:
+- [x] **T4.3** Componente Sidebar Colapsable:
   - Crear el menú lateral con transición fluida entre estado expandido (`260px`) y colapsado (`72px` o drawer en móvil).
   - Integrar las secciones requeridas:
     - Desplegable de Carreras (Sistemas, Industrial, Mecánica, Civil, etc.).
     - Vista informativa de **Imágenes** (con aviso de que no afecta el progreso formal).
     - Vista informativa de **Redacción** (con aviso de que no afecta el progreso formal).
     - Biblioteca de **Prompts** con tarjetas limpias y botón de copiado rápido.
-- [ ] **T4.4** Enrutamiento y Vistas de Contenido:
+- [x] **T4.4** Enrutamiento y Vistas de Contenido:
   - Configurar Vue Router (`router/index.js`) con las rutas principales: `/`, `/login`, `/modules`, `/modules/:id`, `/lessons/:id`, `/progress`, `/videos`, `/news`, `/profile`.
   - Construir la vista de Módulos (`ModulesView.vue`) mostrando las tarjetas de los 6 ejes pedagógicos.
   - Construir el Visor de Lección (`LessonDetailView.vue`) con lectura por bloques, navegación anterior/siguiente y llamada a actividades.
-- [ ] **T4.5** *Exit Criteria Día 4:* Navegación fluida entre pantallas. El Sidebar se pliega y despliega correctamente. Las vistas de Imágenes, Redacción y Prompts son accesibles y no alteran métricas.
+- [x] **T4.5** *Exit Criteria Día 4:* Navegación fluida entre pantallas. El Sidebar se pliega y despliega correctamente. Las vistas de Imágenes, Redacción y Prompts son accesibles y no alteran métricas.
 
 ---
 
@@ -122,20 +122,20 @@
 
 **Objetivo:** Conectar el frontend con la API de Django usando Pinia y Axios para autenticación y guardado persistente del progreso.
 
-- [ ] **T5.1** Configuración de Servicios y Cliente HTTP:
+- [x] **T5.1** Configuración de Servicios y Cliente HTTP:
   - Crear `frontend/src/services/api.js` con la instancia configurada de Axios y manejo de encabezados de autorización.
   - Implementar servicios modulares: `authService.js`, `learningService.js`, `progressService.js`, `activityService.js`.
-- [ ] **T5.2** Stores con Pinia:
+- [x] **T5.2** Stores con Pinia:
   - Implementar `stores/auth.js` (estado del usuario, tokens/cookies, login, logout).
   - Implementar `stores/progress.js` (resumen de lecciones completadas, cálculo de porcentajes y sincronización con el servidor).
-- [ ] **T5.3** Flujo de Autenticación Completo:
+- [x] **T5.3** Flujo de Autenticación Completo:
   - Conectar formulario de `LoginView.vue` con `/api/v1/auth/login/`.
   - Proteger rutas privadas mediante Navigation Guards en Vue Router (`beforeEach`).
-- [ ] **T5.4** Sincronización del Avance del Estudiante:
+- [x] **T5.4** Sincronización del Avance del Estudiante:
   - Al abrir una lección, emitir evento para registrar estado `in_progress`.
   - Al terminar la lectura o actividad, permitir al estudiante marcar explícitamente `completed`.
   - Actualizar el store de Pinia y persistir el cambio en MySQL.
-- [ ] **T5.5** *Exit Criteria Día 5:* Un estudiante inicia sesión, completa una lección, cierra sesión y al volver a entrar su progreso se mantiene intacto sin duplicados.
+- [x] **T5.5** *Exit Criteria Día 5:* Un estudiante inicia sesión, completa una lección, cierra sesión y al volver a entrar su progreso se mantiene intacto sin duplicados.
 
 ---
 
@@ -143,19 +143,19 @@
 
 **Objetivo:** Desarrollar el mapa interactivo de progreso con SVG animado mediante Anime.js y habilitar los ejercicios formativos de las lecciones.
 
-- [ ] **T6.1** Trazado SVG del Sendero del Guerrero:
+- [x] **T6.1** Trazado SVG del Sendero del Guerrero:
   - Diseñar el vector SVG del camino serpenteante en `frontend/src/views/ProgressView.vue` conectando las 6 estaciones hacia la montaña.
   - Diferenciar visualmente los tramos recorridos (Aguamarina `#2A9D8F`) de los pendientes (gris `#D1D5DB`).
   - Representar los 6 módulos como campamentos con banderas ondeando en Coral `#E76F51` al ser completados.
-- [ ] **T6.2** Animación con Anime.js:
+- [x] **T6.2** Animación con Anime.js:
   - Implementar la animación del trazado del camino (`strokeDashoffset`).
   - Animar el desplazamiento del avatar del guerrero hacia la estación correspondiente al progreso actual del estudiante utilizando `anime.path()`.
   - Condicionar la ejecución de animaciones a la directiva de accesibilidad `@media (prefers-reduced-motion: reduce)`.
-- [ ] **T6.3** Componente de Actividades Formativas:
+- [x] **T6.3** Componente de Actividades Formativas:
   - Construir el componente de preguntas en `LessonDetailView.vue` para selección múltiple y reflexión.
   - Mostrar explicaciones pedagógicas inmediatas tras responder, enfatizando el aprendizaje reflexivo y eliminando mensajes de castigo o penalización.
   - Registrar el intento formativo en la API al concluir.
-- [ ] **T6.4** *Exit Criteria Día 6:* El mapa del guerrero se anima y ubica al personaje en la posición real según los datos de MySQL. Las actividades formativas funcionan y retroalimentan al usuario.
+- [x] **T6.4** *Exit Criteria Día 6:* El mapa del guerrero se anima y ubica al personaje en la posición real según los datos de MySQL. Las actividades formativas funcionan y retroalimentan al usuario.
 
 ---
 
@@ -185,3 +185,82 @@
 * **Integración de los 6 módulos oficiales:** Fundamentos, Prompts, Verificaciones, Ética e Integridad, Aplicación en investigación/redacción y Actividades finales.
 * **Componentes clave cubiertos:** Sidebar colapsable (Carreras, Imágenes, Redacción, Prompts), Topbar (Videos, Noticias, Progreso, Perfil) y el mapa interactivo del guerrero hacia la montaña con Anime.js.
 * **Criterios de salida explícitos:** Cada día cuenta con validación técnica antes de avanzar.
+```
+## 🚀 Fase 8: Rediseño Visual, Portal de Bienvenida (CRM-Hero), Temas y Experiencia Refinada
+
+**Objetivo:** Transformar la experiencia visual eliminando la sobrecarga y el exceso de bordes redondeados, incorporando una Landing/Portal ejecutivo con video de fondo cinemático optimizado, animación SVG con el isotipo oficial ParLIA, autoservicio de registro de usuarios, cambio de tema claro/oscuro nativo, selector de idioma y un rediseño sobrio e interactivo de la vista de progreso.
+
+### 8.1. Arquitectura de Rutas y Portal de Bienvenida (No forzar Login al entrar)
+- [/] **T8.1.1** Reconfiguración de rutas en `router/index.js`:
+  - Definir la ruta raíz `/` como el **Portal de Bienvenida / Dashboard General de ParLIA** accesible públicamente (sin redirigir al login por defecto).
+  - Mover el formulario de inicio de sesión a `/login` y crear la ruta `/register` para nuevos estudiantes.
+  - Actualizar Navigation Guards: permitir navegación exploratoria pública al portal general y exigir autenticación únicamente al ingresar al visor detallado de lecciones o al guardar progreso personal.
+- [/] **T8.1.2** Maquetación de la Vista Principal (`HomeView.vue` - Estilo CRM Ejecutivo):
+  - Crear la estructura Hero de alto impacto: video de fondo en bucle sutil con overlay de degradado profesional (`backdrop-blur` ligero, sin oscurecer ni quemar los colores).
+  - Contenedor interactivo sobre el video con el isotipo SVG oficial de ParLIA animado mediante Anime.js (trazado de líneas Wayuu/tecnológicas y pulsos de conexión).
+  - Título y propuesta de valor clara: *"ParLIA: Educación e Inteligencia Artificial"* con botones de acción rápida: `[Explorar Módulos]`, `[Registrarme]` e `[Iniciar Sesión]`.
+  - Sección inferior tipo CRM Dashboard con métricas agregadas sobrias (6 módulos de ingeniería, estadísticas de cobertura, accesos rápidos a carreras y resumen visual del ecosistema sin saturación).
+
+### 8.2. Registro de Nuevos Estudiantes (Self-Service)
+- [ ] **T8.2.1** Endpoint de registro en el Backend (`apps/accounts`):
+  - Implementar `RegisterSerializer` con validación de correo institucional (`@uniguajira.edu.co` opcional o abierto con selección de carrera: Sistemas, Industrial, Mecánica, Civil, Otro).
+  - Crear endpoint `POST /api/v1/auth/register/` con validación segura de contraseñas (Django password validators) y login automático inmediato tras registro exitoso.
+- [ ] **T8.2.2** Vista de Registro en el Frontend (`RegisterView.vue`):
+  - Formulario limpio, sin marcos sobrecargados: nombre, correo, programa académico, contraseña y confirmación.
+  - Integración con Pinia `authStore.register()` y redirección inmediata al portal o a los módulos.
+
+### 8.3. Rediseño del Sistema de Diseño (Menos Curvas, Más Elegancia y Tipografía Nítida)
+- [ ] **T8.3.1** Depuración de Tokens de Estilo (`styles/variables.css`):
+  - Reducir drásticamente los radios de borde en toda la aplicación: cambiar `border-radius: 9999px` / `24px` a bordes planos sutiles (`border-radius: 4px` o `6px` máximo).
+  - Eliminar sombras pesadas tipo neumorfismo o flotaciones artificiales; adoptar bordes de precisión `1px solid var(--border-color)` con contraste controlado.
+  - Ajustar la paleta a los tonos corporativos exactos de la imagen oficial de ParLIA: Azul Petróleo Oscuro (`#0C1E2F`), Naranja/Coral Vivo (`#FF5B26`), Ocre (`#F99D1C`), Cian Wayuu (`#20A4B8`) y Blanco Puro (`#FFFFFF`).
+- [ ] **T8.3.2** Sistema de Modo Claro y Modo Oscuro (Dark / Light Theme):
+  - Crear el switch de tema en el Topbar con persistencia en `localStorage` y detección automática de preferencia del sistema (`prefers-color-scheme`).
+  - Definir las variables CSS para ambos temas:
+    - *Modo Claro:* Fondo `#F8F9FA` / `#FFFFFF`, texto `#0C1E2F`, tarjetas con bordes `#E2E8F0`, logo con versión clara (`fondo_claro.jpeg`).
+    - *Modo Oscuro:* Fondo profundo `#08131E` / `#0C1E2F`, texto `#F1F5F9`, bordes `#1E3A54`, logo con versión oscura (`fondo_oscuro.jpeg`).
+  - Crear un store en Pinia (`stores/theme.js`) que administre la clase `.dark` en la etiqueta `<html>`.
+
+### 8.4. Internacionalización / Selector de Idioma (i18n)
+- [ ] **T8.4.1** Estructura base de traducción:
+  - Crear módulo de textos o integrar `vue-i18n` básico con soporte para Español (ES) e Inglés (EN).
+  - Añadir control selector de idioma en el Topbar (`ES | EN`) con guardado de preferencia en `localStorage`.
+  - Traducir elementos de navegación global: Módulos, Videos, Noticias, Progreso, Perfil, Login, Registro, Buscar y etiquetas de estado.
+
+### 8.5. Ajustes de Navegación, Logotipo Dinámico y Enlaces
+- [ ] **T8.5.1** Logotipo Oficial Dinámico con Retorno al Inicio:
+  - Configurar el logo de ParLIA en el Topbar y Sidebar como un enlace interactivo hacia `/` (`router-link to="/"`).
+  - Hacer que la imagen del logo cambie automáticamente entre `fondo_claro.jpeg` y `fondo_oscuro.jpeg` dependiendo del tema activo (claro u oscuro).
+  - Aplicar cursor pointer y micro-interacción sutil de escala al pasar el mouse.
+- [ ] **T8.5.2** Limpieza y ergonomía del Topbar y Sidebar:
+  - Mantener en el Topbar: Selector de Idioma (`ES/EN`), Switch de Tema (`☀️/🌙`), `[📺 Videos]`, `[📰 Noticias]`, `[🎯 Progreso]` y `[👤 Perfil]` (o botones de Login/Registro si no hay sesión activa).
+  - Ajustar el Sidebar izquierdo para que sea plano, discreto y retráctil, sin curvas gruesas.
+
+### 8.6. Rediseño del Módulo de Progreso (Reemplazo del diseño anterior de la montaña)
+- [ ] **T8.6.1** Arquitectura de la Vista de Progreso (`ProgressView.vue`):
+  - Descartar el estilo caricaturesco con conos; construir un **Dashboard Ejecutivo de Hitos y Maestría (Inspiración CRM / Timeline)**.
+  - Estructurar el avance como una ruta tecnológica horizontal/vertical modular de alta precisión (Stepper interactivo con nodos de estado: completado, activo, bloqueado).
+  - Cada hito muestra: nombre del módulo, porcentaje real, tiempo invertido y botón de acceso rápido.
+- [ ] **T8.6.2** Animación refinada de Progreso con Anime.js:
+  - Animar el llenado de barras de calibración y medidores numéricos (`0% -> XX%`) con curvas suaves al entrar a la vista.
+  - Tarjeta de resumen de habilidades técnicas (Prompting, Auditoría, Ética, Código) con indicadores radiales limpios.
+
+### 8.7. Validación, Rendimiento y Pruebas
+- [ ] **T8.7.1** Optimización del Video de Fondo y Assets:
+  - Verificar que el video de fondo se reproduzca en `autoplay`, `muted`, `loop`, `playsinline` con fallback de poster para bajo consumo de datos y móviles.
+  - Asegurar carga diferida (*lazy loading*) y que las animaciones de Anime.js no superen el 2% de uso continuo de CPU.
+- [ ] **T8.7.2** *Exit Criteria Fase 8:* Al ingresar a `localhost:5173` se presenta el portal ParLIA con video y SVG animados, navegación fluida, cambio instantáneo de tema e idioma, registro libre y progreso rediseñado sin bordes sobrecargados.
+```
+
+---
+
+### Resumen de los cambios incorporados en la hoja de ruta
+1. **Días 1 a 6 cerrados `[x]`:** Se refleja el avance técnico completado en la lógica, modelos, migraciones y endpoints.
+2. **Fase 8 añadida:**
+   * **Portal de entrada abierto (`/`):** La página principal no fuerza al login; ofrece una vista ejecutiva estilo CRM con video de fondo optimizado (siguiendo la inspiración del video hero) y animación SVG del imagotipo Wayuu/IA de ParLIA.
+   * **Autoservicio de registro:** Nuevos usuarios pueden registrarse directamente con su carrera.
+   * **Estética plana y profesional:** Eliminación de los bordes excesivamente redondeados y sombras pesadas, adoptando una interfaz nítida y minimalista.
+   * **Modo Claro / Modo Oscuro:** Integración de los dos logos oficiales provistos (`fondo_claro.jpeg` y `fondo_oscuro.jpeg`) con paleta sincronizada.
+   * **Selector de Idioma:** Control `ES / EN` en el Topbar con persistencia.
+   * **Logo interactivo:** Clic en el logo redirige siempre al inicio.
+   * **Rediseño del Progreso:** Sustitución de los conos y la montaña por un timeline interactivo y profesional tipo dashboard de maestría.
