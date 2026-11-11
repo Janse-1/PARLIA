@@ -23,10 +23,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
-        run: npm ci || npm install
+        run: npm install
 
       - name: Build project
         run: npm run build
@@ -37,7 +37,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Carpeta que genera Vue al compilar
+          path: './dist'
 
   deploy:
     environment:
