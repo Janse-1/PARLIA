@@ -51,6 +51,27 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  async function register(payload) {
+    loading.value = true
+    error.value = null
+    try {
+      const data = await authService.register(payload)
+      token.value = data.token
+      user.value = data.user
+      setStoredToken(data.token)
+      setStoredUser(data.user)
+      return data
+    } catch (err) {
+      const msg =
+        err.response?.data?.message ||
+        'No fue posible completar el registro. Verifica los datos ingresados.'
+      error.value = msg
+      throw new Error(msg)
+    } finally {
+      loading.value = false
+    }
+  }
+
   async function fetchMe() {
     if (!token.value) return null
     loading.value = true
@@ -96,9 +117,9 @@ export const useAuthStore = defineStore('auth', () => {
     error,
     isAuthenticated,
     login,
+    register,
     fetchMe,
     logout,
     clearSession,
   }
 })
-

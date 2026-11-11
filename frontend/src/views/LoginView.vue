@@ -24,7 +24,7 @@ async function handleSubmit() {
   isSubmitting.value = true
   try {
     await authStore.login(email.value.trim(), password.value)
-    await progressStore.fetchMyProgress()
+    await progressStore.fetchMyProgress().catch(() => null)
     const target = route.query.redirect?.toString() || '/modules'
     router.push(target)
   } catch (err) {
@@ -37,10 +37,12 @@ async function handleSubmit() {
 
 <template>
   <div class="card login-card">
+    <router-link to="/" class="back-home-link">← Volver al Portal ParLIA</router-link>
+
     <div class="login-brand">
-      <span class="brand-mark">P</span>
+      <img src="/logo_parlia.png" alt="ParLIA Logo" class="brand-logo-img" />
       <div>
-        <h1>PARLIA</h1>
+        <h1>ParLIA</h1>
         <p class="brand-caption">Laboratorio Virtual de Aprendizaje en IA Generativa</p>
       </div>
     </div>
@@ -52,7 +54,7 @@ async function handleSubmit() {
 
     <form class="login-form" @submit.prevent="handleSubmit">
       <div class="form-group">
-        <label for="email">Correo Institucional</label>
+        <label for="email">Correo Electrónico</label>
         <input
           id="email"
           v-model="email"
@@ -82,6 +84,11 @@ async function handleSubmit() {
       <button type="submit" class="btn btn-primary login-btn" :disabled="isSubmitting">
         {{ isSubmitting ? 'Verificando credenciales...' : 'Ingresar al Laboratorio' }}
       </button>
+
+      <p class="auth-switch-text">
+        ¿Aún no tienes una cuenta?
+        <router-link to="/register">Regístrate aquí</router-link>
+      </p>
     </form>
   </div>
 </template>
@@ -93,6 +100,14 @@ async function handleSubmit() {
   padding: var(--space-8);
 }
 
+.back-home-link {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-secondary);
+  margin-bottom: var(--space-3);
+}
+
 .login-brand {
   display: flex;
   align-items: center;
@@ -100,17 +115,10 @@ async function handleSubmit() {
   margin-bottom: var(--space-4);
 }
 
-.brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background-color: var(--color-primary);
-  color: var(--text-inverse);
-  font-weight: 700;
-  font-size: 1.35rem;
+.brand-logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .brand-caption {
@@ -140,7 +148,7 @@ async function handleSubmit() {
 .form-input {
   height: 42px;
   padding: 0 14px;
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
   border: 1px solid var(--border-subtle);
   background-color: var(--bg-surface);
   font-family: var(--font-family-base);
@@ -156,7 +164,7 @@ async function handleSubmit() {
 .error-banner {
   margin: 0;
   padding: var(--space-3);
-  border-radius: var(--radius-sm);
+  border-radius: 4px;
   background-color: var(--color-accent-soft);
   color: var(--color-accent-hover);
   font-size: 0.85rem;
@@ -166,5 +174,12 @@ async function handleSubmit() {
 .login-btn {
   width: 100%;
   height: 44px;
+}
+
+.auth-switch-text {
+  margin: 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
 }
 </style>

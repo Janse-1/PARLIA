@@ -24,21 +24,22 @@ let rafId = null
 const i18n = {
   ES: {
     nav: {
-      synapse: 'Sinapsis Cognitiva',
-      pillars: 'Pilares Formativos',
-      methodology: 'Metodología Crítica',
-      audit: 'Auditoría Viva',
+      synapse: 'Sinapsis',
+      pillars: 'Pilares',
+      methodology: 'Metodología',
+      audit: 'Auditoría',
       identity: 'Identidad Uniguajira',
+      suggestions: 'Sugerencias',
     },
-    exploreBtn: 'Ingresar al Laboratorio',
-    heroBadge: 'FACULTAD DE INGENIERÍA · UNIVERSIDAD DE LA GUAJIRA',
+    exploreBtn: 'Ingresar',
+    heroBadge: 'UNIVERSIDAD DE LA GUAJIRA',
     heroTitleLine1: 'Criterio Humano.',
     heroTitleLine2: 'Potencia Algorítmica.',
     heroTitleLine3: 'Ingeniería Sin Atajos.',
     heroDesc:
       'ParLIA es el laboratorio cognitivo de Inteligencia Artificial Generativa diseñado para que el estudiante de ingeniería domine el razonamiento analítico, audite alucinaciones técnicas y utilice modelos de lenguaje con ética transparente y cero temor punitivo.',
     primaryCtaGuest: 'Iniciar Sesión',
-    secondaryCtaGuest: 'Crear Cuenta Estudiantil',
+    secondaryCtaGuest: 'Crear Cuenta',
     primaryCtaAuth: 'Continuar en el Laboratorio',
     secondaryCtaAuth: 'Explorar Sinapsis',
     heroStats: [
@@ -158,26 +159,34 @@ const i18n = {
       title: 'Comienza tu Recorrido Formativo en ParLIA',
       desc: 'Accede con tu cuenta estudiantil o regístrate en segundos para desbloquear el laboratorio completo.',
     },
+    suggestionsSection: {
+      badge: 'MEJORA CONTINUA · TU VOZ EN PARLIA',
+      title: 'Buzón Abierto de Sugerencias',
+      desc: 'ParLIA evoluciona junto a los estudiantes y docentes de la Facultad de Ingeniería. Si tienes ideas, comentarios pedagógicos, propuestas de nuevos casos de estudio o deseas reportar algún detalle, compártelo en nuestro formulario oficial.',
+      btnLabel: 'Enviar Sugerencia en el Formulario',
+      note: 'Se abrirá el formulario oficial de Google Forms en una nueva pestaña.',
+    },
     footerCredits:
       'Laboratorio Virtual de Aprendizaje en IA Generativa · Facultad de Ingeniería · Universidad de La Guajira',
   },
   EN: {
     nav: {
-      synapse: 'Cognitive Synapse',
-      pillars: 'Formative Pillars',
-      methodology: 'Critical Methodology',
-      audit: 'Live Audit',
+      synapse: 'Synapse',
+      pillars: 'Pillars',
+      methodology: 'Methodology',
+      audit: 'Audit',
       identity: 'Uniguajira Identity',
+      suggestions: 'Suggestions',
     },
-    exploreBtn: 'Enter Laboratory',
-    heroBadge: 'FACULTY OF ENGINEERING · UNIVERSIDAD DE LA GUAJIRA',
+    exploreBtn: 'Enter',
+    heroBadge: 'UNIVERSIDAD DE LA GUAJIRA',
     heroTitleLine1: 'Human Judgment.',
     heroTitleLine2: 'Algorithmic Power.',
     heroTitleLine3: 'Engineering Without Shortcuts.',
     heroDesc:
       'ParLIA is the Generative AI cognitive laboratory designed for engineering students to master analytical reasoning, audit technical hallucinations, and use language models with transparent ethics and zero punitive fear.',
     primaryCtaGuest: 'Sign In',
-    secondaryCtaGuest: 'Create Student Account',
+    secondaryCtaGuest: 'Create Account',
     primaryCtaAuth: 'Continue in Laboratory',
     secondaryCtaAuth: 'Explore Synapse',
     heroStats: [
@@ -296,6 +305,13 @@ const i18n = {
       badge: 'PARLIA VIRTUAL LABORATORY',
       title: 'Begin Your Formative Journey in ParLIA',
       desc: 'Sign in with your student account or register in seconds to unlock the full laboratory.',
+    },
+    suggestionsSection: {
+      badge: 'CONTINUOUS IMPROVEMENT · YOUR VOICE IN PARLIA',
+      title: 'Open Suggestions & Feedback',
+      desc: 'ParLIA evolves alongside students and faculty at the School of Engineering. If you have ideas, pedagogical feedback, new case study proposals, or want to report any detail, share it through our official form.',
+      btnLabel: 'Submit Suggestion via Form',
+      note: 'Opens the official Google Forms survey in a new tab.',
     },
     footerCredits:
       'Generative AI Virtual Learning Lab · Faculty of Engineering · Universidad de La Guajira',
@@ -454,6 +470,11 @@ function initScrollTimeline() {
   )
 }
 
+function scheduleAnimationStep() {
+  if (rafId) return
+  rafId = window.requestAnimationFrame(updateAnimationLoop)
+}
+
 function handleWindowScroll() {
   if (!scrollTrackRef.value) return
   const rect = scrollTrackRef.value.getBoundingClientRect()
@@ -463,6 +484,7 @@ function handleWindowScroll() {
 
   const currentScrolled = -rect.top
   rawScrollProgress.value = Math.max(0, Math.min(1, currentScrolled / scrollableDistance))
+  scheduleAnimationStep()
 }
 
 function updateAnimationLoop() {
@@ -472,8 +494,14 @@ function updateAnimationLoop() {
     if (scrollTimeline) {
       scrollTimeline.seek(smoothScrollProgress.value * scrollTimeline.duration)
     }
+    rafId = window.requestAnimationFrame(updateAnimationLoop)
+  } else {
+    smoothScrollProgress.value = rawScrollProgress.value
+    if (scrollTimeline) {
+      scrollTimeline.seek(smoothScrollProgress.value * scrollTimeline.duration)
+    }
+    rafId = null
   }
-  rafId = window.requestAnimationFrame(updateAnimationLoop)
 }
 
 // Coordenada dinámica del foco de luz (de 16% izquierda a 80% derecha según el scroll)
@@ -491,7 +519,6 @@ onMounted(async () => {
   }
   window.addEventListener('scroll', handleWindowScroll, { passive: true })
   window.addEventListener('resize', handleWindowScroll, { passive: true })
-  rafId = window.requestAnimationFrame(updateAnimationLoop)
 })
 
 onUnmounted(() => {
@@ -510,6 +537,8 @@ onUnmounted(() => {
       <video
         class="background-video"
         :src="localHeroVideo"
+        poster="/logo_parlia.png"
+        preload="metadata"
         autoplay
         muted
         loop
@@ -534,6 +563,7 @@ onUnmounted(() => {
         <a href="#methodology">{{ t.nav.methodology }}</a>
         <a href="#audit">{{ t.nav.audit }}</a>
         <a href="#identity">{{ t.nav.identity }}</a>
+        <a href="#suggestions">{{ t.nav.suggestions }}</a>
       </nav>
 
       <div class="navbar-actions">
@@ -584,6 +614,7 @@ onUnmounted(() => {
         <a href="#methodology" @click="closeMobileMenu">{{ t.nav.methodology }}</a>
         <a href="#audit" @click="closeMobileMenu">{{ t.nav.audit }}</a>
         <a href="#identity" @click="closeMobileMenu">{{ t.nav.identity }}</a>
+        <a href="#suggestions" @click="closeMobileMenu">{{ t.nav.suggestions }}</a>
         <div class="mobile-drawer-ctas">
           <button type="button" class="primary-button full-width" @click="handleExplorePlatform">
             {{ t.exploreBtn }}
@@ -652,6 +683,8 @@ onUnmounted(() => {
                 :src="paraAnimarImg"
                 alt="Base cognitiva ParLIA"
                 class="para-animar-dimmed"
+                loading="lazy"
+                decoding="async"
                 aria-hidden="true"
               />
 
@@ -666,6 +699,8 @@ onUnmounted(() => {
                   :src="paraAnimarImg"
                   alt="Conexión entre libros de ingeniería, estudiante e Inteligencia Artificial"
                   class="para-animar-lit"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -948,7 +983,38 @@ onUnmounted(() => {
         </div>
       </section>
 
-      <!-- 7. FOOTER -->
+      <!-- 7. SECCIÓN DE SUGERENCIAS (ENLACE AL FORMULARIO OFICIAL) -->
+      <section id="suggestions" class="section-spacing">
+        <div class="suggestions-card">
+          <div class="suggestions-info">
+            <span class="pill-tag">{{ t.suggestionsSection.badge }}</span>
+            <h2>{{ t.suggestionsSection.title }}</h2>
+            <p>{{ t.suggestionsSection.desc }}</p>
+          </div>
+
+          <div class="suggestions-action-box">
+            <a
+              href="https://forms.gle/rLWN64RDtBjdeMbg7"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="primary-button suggestions-btn"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+              </svg>
+              <span>{{ t.suggestionsSection.btnLabel }}</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </a>
+            <span class="suggestions-note">{{ t.suggestionsSection.note }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. FOOTER -->
       <footer class="landing-footer">
         <div>ParLIA © 2026 · Universidad de La Guajira</div>
         <div>{{ t.footerCredits }}</div>
@@ -1840,6 +1906,56 @@ onUnmounted(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+/* SUGERENCIAS */
+.suggestions-card {
+  background: var(--card-glass);
+  border: 1px solid rgba(32, 164, 184, 0.35);
+  border-left: 4px solid var(--parlia-cyan);
+  border-radius: 20px;
+  padding: 2.8rem;
+  backdrop-filter: blur(18px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.suggestions-info {
+  flex: 1 1 480px;
+  max-width: 720px;
+}
+
+.suggestions-info h2 {
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  color: #FFFFFF;
+  margin: 1rem 0 0.75rem;
+  line-height: 1.15;
+}
+
+.suggestions-info p {
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.suggestions-action-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.suggestions-btn {
+  gap: 0.65rem;
+}
+
+.suggestions-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
 }
 
 /* FOOTER */

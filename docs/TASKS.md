@@ -163,19 +163,19 @@
 
 **Objetivo:** Auditar la plataforma en escritorio y móvil, verificar medidas de seguridad y dejar el laboratorio listo para demostración.
 
-- [ ] **T7.1** Auditoría de Calidad de Datos y Seguridad:
+- [x] **T7.1** Auditoría de Calidad de Datos y Seguridad:
   - Comprobar que no existen accesos no autorizados a datos de otros estudiantes (test de IDOR en `/api/v1/progress/`).
   - Confirmar que contraseñas no se exponen en logs y que `.env` está fuera del repositorio.
   - Verificar que `DEBUG=False` opera correctamente con `ALLOWED_HOSTS` y `CORS_ALLOWED_ORIGINS` configurados.
-- [ ] **T7.2** Pruebas de Usabilidad y Responsividad:
+- [x] **T7.2** Pruebas de Usabilidad y Responsividad:
   - Validar navegación y visualización en pantallas móviles (drawer lateral, mapa vertical adaptado, legibilidad de textos).
   - Verificar que no existan muros de texto excesivos y que el espacio en blanco (*whitespace*) sea generoso.
-- [ ] **T7.3** Generación de Respaldo de Base de Datos:
+- [x] **T7.3** Generación de Respaldo de Base de Datos:
   - Ejecutar volcado de prueba de MySQL (`mysqldump`) para asegurar que la información y el progreso pueden respaldarse y restaurarse sin pérdidas.
-- [ ] **T7.4** Documentación y Cierre de Bitácoras:
+- [x] **T7.4** Documentación y Cierre de Bitácoras:
   - Actualizar `docs/memory.md` con el estado final de la implementación.
   - Registrar las decisiones de arquitectura definitivas en `docs/decisions.md`.
-- [ ] **T7.5** *Exit Criteria Día 7:* PARLIA funcional de punta a punta, con sus 6 módulos navegables, autenticación protegida, mapa del guerrero interactivo y datos persistidos en MySQL.
+- [x] **T7.5** *Exit Criteria Día 7:* PARLIA funcional de punta a punta, con sus 6 módulos navegables, autenticación protegida, mapa del guerrero interactivo y datos persistidos en MySQL.
 ```
 
 ---
@@ -202,19 +202,19 @@
   - Sección inferior tipo CRM Dashboard con métricas agregadas sobrias (6 módulos de ingeniería, estadísticas de cobertura, accesos rápidos a carreras y resumen visual del ecosistema sin saturación).
 
 ### 8.2. Registro de Nuevos Estudiantes (Self-Service)
-- [ ] **T8.2.1** Endpoint de registro en el Backend (`apps/accounts`):
+- [x] **T8.2.1** Endpoint de registro en el Backend (`apps/accounts`):
   - Implementar `RegisterSerializer` con validación de correo institucional (`@uniguajira.edu.co` opcional o abierto con selección de carrera: Sistemas, Industrial, Mecánica, Civil, Otro).
   - Crear endpoint `POST /api/v1/auth/register/` con validación segura de contraseñas (Django password validators) y login automático inmediato tras registro exitoso.
-- [ ] **T8.2.2** Vista de Registro en el Frontend (`RegisterView.vue`):
+- [x] **T8.2.2** Vista de Registro en el Frontend (`RegisterView.vue`):
   - Formulario limpio, sin marcos sobrecargados: nombre, correo, programa académico, contraseña y confirmación.
   - Integración con Pinia `authStore.register()` y redirección inmediata al portal o a los módulos.
 
 ### 8.3. Rediseño del Sistema de Diseño (Menos Curvas, Más Elegancia y Tipografía Nítida)
-- [ ] **T8.3.1** Depuración de Tokens de Estilo (`styles/variables.css`):
+- [x] **T8.3.1** Depuración de Tokens de Estilo (`styles/variables.css`):
   - Reducir drásticamente los radios de borde en toda la aplicación: cambiar `border-radius: 9999px` / `24px` a bordes planos sutiles (`border-radius: 4px` o `6px` máximo).
   - Eliminar sombras pesadas tipo neumorfismo o flotaciones artificiales; adoptar bordes de precisión `1px solid var(--border-color)` con contraste controlado.
   - Ajustar la paleta a los tonos corporativos exactos de la imagen oficial de ParLIA: Azul Petróleo Oscuro (`#0C1E2F`), Naranja/Coral Vivo (`#FF5B26`), Ocre (`#F99D1C`), Cian Wayuu (`#20A4B8`) y Blanco Puro (`#FFFFFF`).
-- [ ] **T8.3.2** Sistema de Modo Claro y Modo Oscuro (Dark / Light Theme):
+- [x] **T8.3.2** Sistema de Modo Claro y Modo Oscuro (Dark / Light Theme):
   - Crear el switch de tema en el Topbar con persistencia en `localStorage` y detección automática de preferencia del sistema (`prefers-color-scheme`).
   - Definir las variables CSS para ambos temas:
     - *Modo Claro:* Fondo `#F8F9FA` / `#FFFFFF`, texto `#0C1E2F`, tarjetas con bordes `#E2E8F0`, logo con versión clara (`fondo_claro.jpeg`).
@@ -222,34 +222,34 @@
   - Crear un store en Pinia (`stores/theme.js`) que administre la clase `.dark` en la etiqueta `<html>`.
 
 ### 8.4. Internacionalización / Selector de Idioma (i18n)
-- [ ] **T8.4.1** Estructura base de traducción:
+- [x] **T8.4.1** Estructura base de traducción:
   - Crear módulo de textos o integrar `vue-i18n` básico con soporte para Español (ES) e Inglés (EN).
   - Añadir control selector de idioma en el Topbar (`ES | EN`) con guardado de preferencia en `localStorage`.
   - Traducir elementos de navegación global: Módulos, Videos, Noticias, Progreso, Perfil, Login, Registro, Buscar y etiquetas de estado.
 
 ### 8.5. Ajustes de Navegación, Logotipo Dinámico y Enlaces
-- [ ] **T8.5.1** Logotipo Oficial Dinámico con Retorno al Inicio:
+- [x] **T8.5.1** Logotipo Oficial Dinámico con Retorno al Inicio:
   - Configurar el logo de ParLIA en el Topbar y Sidebar como un enlace interactivo hacia `/` (`router-link to="/"`).
   - Hacer que la imagen del logo cambie automáticamente entre `fondo_claro.jpeg` y `fondo_oscuro.jpeg` dependiendo del tema activo (claro u oscuro).
   - Aplicar cursor pointer y micro-interacción sutil de escala al pasar el mouse.
-- [ ] **T8.5.2** Limpieza y ergonomía del Topbar y Sidebar:
+- [x] **T8.5.2** Limpieza y ergonomía del Topbar y Sidebar:
   - Mantener en el Topbar: Selector de Idioma (`ES/EN`), Switch de Tema (`☀️/🌙`), `[📺 Videos]`, `[📰 Noticias]`, `[🎯 Progreso]` y `[👤 Perfil]` (o botones de Login/Registro si no hay sesión activa).
   - Ajustar el Sidebar izquierdo para que sea plano, discreto y retráctil, sin curvas gruesas.
 
 ### 8.6. Rediseño del Módulo de Progreso (Reemplazo del diseño anterior de la montaña)
-- [ ] **T8.6.1** Arquitectura de la Vista de Progreso (`ProgressView.vue`):
+- [x] **T8.6.1** Arquitectura de la Vista de Progreso (`ProgressView.vue`):
   - Descartar el estilo caricaturesco con conos; construir un **Dashboard Ejecutivo de Hitos y Maestría (Inspiración CRM / Timeline)**.
   - Estructurar el avance como una ruta tecnológica horizontal/vertical modular de alta precisión (Stepper interactivo con nodos de estado: completado, activo, bloqueado).
   - Cada hito muestra: nombre del módulo, porcentaje real, tiempo invertido y botón de acceso rápido.
-- [ ] **T8.6.2** Animación refinada de Progreso con Anime.js:
+- [x] **T8.6.2** Animación refinada de Progreso con Anime.js:
   - Animar el llenado de barras de calibración y medidores numéricos (`0% -> XX%`) con curvas suaves al entrar a la vista.
   - Tarjeta de resumen de habilidades técnicas (Prompting, Auditoría, Ética, Código) con indicadores radiales limpios.
 
 ### 8.7. Validación, Rendimiento y Pruebas
-- [ ] **T8.7.1** Optimización del Video de Fondo y Assets:
+- [x] **T8.7.1** Optimización del Video de Fondo y Assets:
   - Verificar que el video de fondo se reproduzca en `autoplay`, `muted`, `loop`, `playsinline` con fallback de poster para bajo consumo de datos y móviles.
   - Asegurar carga diferida (*lazy loading*) y que las animaciones de Anime.js no superen el 2% de uso continuo de CPU.
-- [ ] **T8.7.2** *Exit Criteria Fase 8:* Al ingresar a `localhost:5173` se presenta el portal ParLIA con video y SVG animados, navegación fluida, cambio instantáneo de tema e idioma, registro libre y progreso rediseñado sin bordes sobrecargados.
+- [x] **T8.7.2** *Exit Criteria Fase 8:* Al ingresar a `localhost:5173` se presenta el portal ParLIA con video y SVG animados, navegación fluida, cambio instantáneo de tema e idioma, registro libre y progreso rediseñado sin bordes sobrecargados.
 ```
 
 ---

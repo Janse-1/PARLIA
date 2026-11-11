@@ -1,23 +1,29 @@
 # MEMORY: Estado Vivo del Sistema y Bitácora Técnica
 
-**Proyecto:** PARLIA (Laboratorio Virtual de Aprendizaje en Inteligencia Artificial Generativa)  
+**Proyecto:** ParLIA (Laboratorio Virtual de Aprendizaje en Inteligencia Artificial Generativa)  
 **Institución:** Universidad de La Guajira - Facultad de Ingeniería  
-**Última actualización:** 2026-11-10  
+**Última actualización:** 2026-11-11  
 
 ---
 
 ## 1. Estado Actual de la Implementación
-* **Fases Completadas:** Fases 1 a 6 — 100% (`[x]`).
-* **Fase en Pausa:** Fase 7 (Se ejecutará al finalizar todas las correcciones de la Fase 8).
-* **Fase Activa:** Fase 8 (Rediseño Visual, Portal de Bienvenida CRM-Hero, Temas y Experiencia Refinada).
-* **Subtareas Completadas en Fase 8:**
-  - T8.1.1 (Reconfiguración de rutas en `router/index.js`: `/` usa `layout: 'landing'` sin mostrar Sidebar/Topbar internos ni módulos/carreras antes de iniciar sesión; todas las rutas internas exigen `requiresAuth: true`).
-  - T8.1.2 (Rediseño completo de `HomeView.vue` inspirado en la estética espacial de Voxel con video de fondo local `gemini_generated_video_0609d70b.mp4`, sección interactiva de scroll-linked timeline con Anime.js sobre `para_animar.jpeg`, secciones `#synapse`, `#technology`, `#system`, `#vision`, `#demo`, `#horizon` y selector bilingüe `EN | ES`).
-* **Subtarea Siguiente:** Bloque 8.2 (`T8.2.1` y `T8.2.2` - Registro de Nuevos Estudiantes Self-Service en Backend y Frontend).
+* **Estado Global:** **100% Completado** (Fases 1 a 8 cerradas y verificadas con `[x]` en `docs/TASKS.md`).
+* **Backend (`d:\parlia\backend`):**
+  - Django 5.2.18 LTS + Django REST Framework sobre MySQL 8.0.40 (`parlia_db`).
+  - 4 aplicaciones de dominio operativas (`apps.accounts`, `apps.learning`, `apps.activities`, `apps.progress`).
+  - Endpoints `/api/v1/` completos: `auth/login/`, `auth/register/`, `auth/logout/`, `me/`, `modules/`, `modules/{id}/`, `lessons/{id}/`, `progress/me/`, `progress/`, `activities/{id}/`, `activities/{id}/attempts/`.
+  - Suite de pruebas automatizadas de seguridad anti-IDOR y registro self-service pasando al 100% (`manage.py test apps.accounts apps.progress --keepdb`).
+* **Frontend (`d:\parlia\frontend`):**
+  - Vue 3.5+ (`<script setup>`), Vite 8, Vue Router 4, Pinia 2, Axios y Anime.js 3.2.
+  - **Portal de Bienvenida (`/` - `HomeView.vue`):** Video de fondo local (`gemini_generated_video_0609d70b.mp4`), animación interactiva de scroll a 60fps sobre `para_animar.jpeg` con revelación por zonas de luz y trazos de Anime.js, secciones con identidad propia de ParLIA (`#synapse`, `#pillars`, `#methodology`, `#audit`, `#identity`) y aislamiento total de módulos/carreras antes de iniciar sesión.
+  - **Sistema de Temas e Idioma (`stores/theme.js` y `stores/i18n.js`):** Cambio instantáneo entre Modo Claro (`fondo_claro.jpeg`) y Modo Oscuro (`fondo_oscuro.jpeg`) con persistencia en `localStorage`, más selector global `ES | EN` en `Topbar.vue` y `Sidebar.vue`.
+  - **Dashboard Ejecutivo de Progreso (`ProgressView.vue`):** Stepper interactivo de los 6 ejes oficiales, contadores numéricos, barras de calibración y anillos radiales de competencias técnicas animados con Anime.js.
+* **Respaldo de Base de Datos (`d:\parlia\backups\parlia_db_backup.sql`):**
+  - Generado y verificado mediante `mysqldump` (`39,789 bytes`, codificación `utf8mb4`).
 
 ---
 
-## 2. Próximos Pasos Inmediatos
-1. Ejecutar **T8.2.1** y **T8.2.2**:
-   - En `backend/apps/accounts/serializers.py`, `views.py` y `urls.py`: implementar `RegisterSerializer` y `POST /api/v1/auth/register/` con validación de contraseña y retorno inmediato de `token` + `user`.
-   - En `frontend/src/services/authService.js`, `stores/auth.js`, `views/RegisterView.vue` y `views/LoginView.vue`: conectar el flujo de registro y navegación entre `/login`, `/register` y `/`.
+## 2. Comandos de Ejecución Rápida
+* **Backend:** `d:\parlia\.venv\Scripts\python.exe d:\parlia\backend\manage.py runserver`
+* **Frontend:** `npm --prefix d:\parlia\frontend run dev`
+* **Tests Backend:** `d:\parlia\.venv\Scripts\python.exe d:\parlia\backend\manage.py test --keepdb`

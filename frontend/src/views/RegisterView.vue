@@ -51,7 +51,7 @@ async function handleRegister() {
       password_confirm: passwordConfirm.value,
     })
     await progressStore.fetchMyProgress().catch(() => null)
-    router.push('/')
+    router.push('/modules')
   } catch (err) {
     errorMessage.value = err.message || 'No fue posible completar el registro.'
   } finally {

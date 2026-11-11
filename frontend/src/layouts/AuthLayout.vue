@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-5);
-  background: linear-gradient(135deg, #F8F9FA 0%, #EEF2F5 100%);
+  background-color: var(--bg-app);
 }
 </style>
 
