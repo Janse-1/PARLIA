@@ -11,8 +11,8 @@
 * **Fase en Pausa:** Fase 7 (Se ejecutará al finalizar todas las correcciones de la Fase 8).
 * **Fase Activa:** Fase 8 (Rediseño Visual, Portal de Bienvenida CRM-Hero, Temas y Experiencia Refinada).
 * **Subtareas Completadas en Fase 8:**
-  - T8.1.1 (Reconfiguración de rutas en `router/index.js` con portal público `/` y navegación exploratoria libre).
-  - T8.1.2 (Maquetación de `HomeView.vue` estilo CRM Ejecutivo con video de fondo `https://youtu.be/gEEKKXmLTIA` e isotipo SVG Kanas Wayuu animado con Anime.js).
+  - T8.1.1 (Reconfiguración de rutas en `router/index.js`: `/` usa `layout: 'landing'` sin mostrar Sidebar/Topbar internos ni módulos/carreras antes de iniciar sesión; todas las rutas internas exigen `requiresAuth: true`).
+  - T8.1.2 (Rediseño completo de `HomeView.vue` inspirado en la estética espacial de Voxel con video de fondo local `gemini_generated_video_0609d70b.mp4`, sección interactiva de scroll-linked timeline con Anime.js sobre `para_animar.jpeg`, secciones `#synapse`, `#technology`, `#system`, `#vision`, `#demo`, `#horizon` y selector bilingüe `EN | ES`).
 * **Subtarea Siguiente:** Bloque 8.2 (`T8.2.1` y `T8.2.2` - Registro de Nuevos Estudiantes Self-Service en Backend y Frontend).
 
 ---

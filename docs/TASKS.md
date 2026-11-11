@@ -191,11 +191,11 @@
 **Objetivo:** Transformar la experiencia visual eliminando la sobrecarga y el exceso de bordes redondeados, incorporando una Landing/Portal ejecutivo con video de fondo cinemático optimizado, animación SVG con el isotipo oficial ParLIA, autoservicio de registro de usuarios, cambio de tema claro/oscuro nativo, selector de idioma y un rediseño sobrio e interactivo de la vista de progreso.
 
 ### 8.1. Arquitectura de Rutas y Portal de Bienvenida (No forzar Login al entrar)
-- [/] **T8.1.1** Reconfiguración de rutas en `router/index.js`:
+- [x] **T8.1.1** Reconfiguración de rutas en `router/index.js`:
   - Definir la ruta raíz `/` como el **Portal de Bienvenida / Dashboard General de ParLIA** accesible públicamente (sin redirigir al login por defecto).
   - Mover el formulario de inicio de sesión a `/login` y crear la ruta `/register` para nuevos estudiantes.
   - Actualizar Navigation Guards: permitir navegación exploratoria pública al portal general y exigir autenticación únicamente al ingresar al visor detallado de lecciones o al guardar progreso personal.
-- [/] **T8.1.2** Maquetación de la Vista Principal (`HomeView.vue` - Estilo CRM Ejecutivo):
+- [x] **T8.1.2** Maquetación de la Vista Principal (`HomeView.vue` - Estilo CRM Ejecutivo):
   - Crear la estructura Hero de alto impacto: video de fondo en bucle sutil con overlay de degradado profesional (`backdrop-blur` ligero, sin oscurecer ni quemar los colores).
   - Contenedor interactivo sobre el video con el isotipo SVG oficial de ParLIA animado mediante Anime.js (trazado de líneas Wayuu/tecnológicas y pulsos de conexión).
   - Título y propuesta de valor clara: *"ParLIA: Educación e Inteligencia Artificial"* con botones de acción rápida: `[Explorar Módulos]`, `[Registrarme]` e `[Iniciar Sesión]`.
